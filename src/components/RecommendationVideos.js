@@ -21,7 +21,7 @@ const RecommendationVideos = ({ beginner, intermediate, expert }) => {
         color='#000'
         mb='33px'
       >
-        Workout for{' '}
+        Workout forr{' '}
         <span style={{ color: '#FF2625', textTransform: 'capitalize' }}>
           beginner
         </span>{' '}
