@@ -20,6 +20,11 @@ const useSidebar = () => {
         active: pathname === '/recommendation',
       },
       {
+        label: 'Favorite',
+        href: '/favorite',
+        active: pathname === '/favorite',
+      },
+      {
         label: 'About',
         href: '/about',
         active: pathname === '/about',

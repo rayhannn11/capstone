@@ -10,7 +10,7 @@ const Home = () => {
   const [bodyPart, setBodyPart] = useState('all');
 
   return (
-    <Box>
+    <Box minHeight='560px' height='auto'>
       <HeroBanner />
       <SearchExercises
         setExercises={setExercises}

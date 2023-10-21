@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useLiveQuery } from 'dexie-react-hooks';
 import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 
 import { exerciseOptions, fetchData, youtubeOptions } from '../utils/fetchData';
+import { db } from '../utils/favoriteExercise';
 import Detail from '../components/Detail';
 import ExerciseVideos from '../components/ExerciseVideos';
 import SimilarExercises from '../components/SimilarExercises';
@@ -12,10 +14,13 @@ const ExerciseDetail = () => {
   const [exerciseVideos, setExerciseVideos] = useState([]);
   const [targetMuscleExercises, setTargetMuscleExercises] = useState([]);
 
-  const [isLiked, setIsLiked] = useState(false);
-
   const { id } = useParams();
 
+  const { exercise } = db;
+  const favoriteExercise = useLiveQuery(() => exercise.toArray(), []);
+  const checkFavorite = favoriteExercise?.find((item) => item.id === id);
+
+  // for api call
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -47,32 +52,49 @@ const ExerciseDetail = () => {
         `${exerciseDbUrl}/exercices/muscle/${firstItem.target}`,
         exerciseOptions
       );
-      console.log(targetMuscleExercisesData.exercice);
+      // console.log(targetMuscleExercisesData.exercice);
       setTargetMuscleExercises(targetMuscleExercisesData.exercice);
     };
 
     fetchExercisesData();
   }, [id]);
 
-  const handleFavorite = () => {
-    setIsLiked(!isLiked);
+  const addFavorite = async (data) => {
+    const { name, gifUrl, bodyPart, target, equipment } = data[0];
+    await exercise.add({
+      id,
+      name,
+      gifUrl,
+      bodyPart,
+      target,
+      equipment,
+    });
+  };
+
+  const deleteFavorite = async () => {
+    exercise.delete(id);
   };
 
   if (!exerciseDetail) return <div>No Data</div>;
 
   return (
-    <Box sx={{ mt: { lg: '96px', xs: '60px' }, ml: { md: '100px' } }}>
-      <button
-        aria-label='unlike this restaurant'
-        id='likeButton'
-        className='like'
-        type='button'
-        onClick={handleFavorite}
-      >
-        {isLiked ? '❤️' : ''}
-      </button>
+    <Box
+      sx={{ mt: { lg: '96px', xs: '60px' }, ml: { md: '100px' } }}
+      minHeight='560px'
+      height='auto'
+    >
+      {checkFavorite ? (
+        <div aria-label='favorite this exercise' className='like'>
+          <span onClick={deleteFavorite}>❤️</span>
+        </div>
+      ) : (
+        <div aria-label='unfavorite this exercise' className='like'>
+          <span onClick={() => addFavorite(exerciseDetail)}>♡</span>
+        </div>
+      )}
+
       {exerciseDetail.map((item) => (
-        <Detail exerciseDetail={item} />
+        <Detail exerciseDetail={item} key={item.name} />
       ))}
 
       <ExerciseVideos

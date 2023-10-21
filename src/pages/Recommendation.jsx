@@ -23,6 +23,7 @@ const Recommendation = () => {
         'https://youtube-search-and-download.p.rapidapi.com/search?query=workout expert',
         youtubeOptions
       );
+      console.log(intermediate, expert);
       setBeginnerData(beginner.contents);
       setIntermediateData(intermediate.contents);
       setExpertData(expert.contents);
@@ -31,7 +32,11 @@ const Recommendation = () => {
     fetchExercisesData();
   }, []);
   return (
-    <Box sx={{ mt: { lg: '96px', xs: '60px' }, ml: { md: '100px' } }}>
+    <Box
+      sx={{ mt: { lg: '96px', xs: '60px' }, ml: { md: '100px' } }}
+      minHeight='560px'
+      height='auto'
+    >
       <RecommendationVideos
         beginner={beginnerData}
         intermediate={intermediateData}
