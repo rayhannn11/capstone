@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import Favorite from './pages/Favorite';
 import NotFound from './pages/NotFound';
 import About from './pages/About';
+import Exercises from './pages/Exercises';
 
 const App = () => (
   <Box width='400px' sx={{ width: { xl: '100%' } }} m='auto'>
@@ -18,6 +19,7 @@ const App = () => (
     <Routes>
       <Route path='/' element={<Home />} />
       <Route path='/exercise/:id' element={<ExerciseDetail />} />
+      <Route path='/exercises' element={<Exercises />} />
       <Route path='/recommendation' element={<Recommendation />} />
       <Route path='/favorite' element={<Favorite />} />
       <Route path='/about' element={<About />} />

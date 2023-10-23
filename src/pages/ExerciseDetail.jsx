@@ -52,8 +52,30 @@ const ExerciseDetail = () => {
         `${exerciseDbUrl}/exercices/muscle/${firstItem.target}`,
         exerciseOptions
       );
-      // console.log(targetMuscleExercisesData.exercice);
+
       setTargetMuscleExercises(targetMuscleExercisesData.exercice);
+
+      // const exerciseDbUrl = 'https://exercisedb.p.rapidapi.com';
+      // const youtubeSearchUrl =
+      //   'https://youtube-search-and-download.p.rapidapi.com';
+
+      // const exerciseDetailData = await fetchData(
+      //   `${exerciseDbUrl}/exercises/exercise/${id}`,
+      //   exerciseOptions
+      // );
+      // setExerciseDetail(exerciseDetailData);
+
+      // const exerciseVideosData = await fetchData(
+      //   `${youtubeSearchUrl}/search?query=${exerciseDetailData.name} exercise`,
+      //   youtubeOptions
+      // );
+      // setExerciseVideos(exerciseVideosData.contents);
+
+      // const targetMuscleExercisesData = await fetchData(
+      //   `${exerciseDbUrl}/exercises/target/${exerciseDetailData.target}`,
+      //   exerciseOptions
+      // );
+      // setTargetMuscleExercises(targetMuscleExercisesData);
     };
 
     fetchExercisesData();
@@ -61,6 +83,7 @@ const ExerciseDetail = () => {
 
   const addFavorite = async (data) => {
     const { name, gifUrl, bodyPart, target, equipment } = data[0];
+    // const { name, gifUrl, bodyPart, target, equipment } = data;
     await exercise.add({
       id,
       name,
@@ -84,18 +107,27 @@ const ExerciseDetail = () => {
       height='auto'
     >
       {checkFavorite ? (
-        <div aria-label='favorite this exercise' className='like'>
-          <span onClick={deleteFavorite}>❤️</span>
+        <div
+          aria-label='favorite this exercise'
+          className='like'
+          onClick={deleteFavorite}
+        >
+          <span>❤️</span>
         </div>
       ) : (
-        <div aria-label='unfavorite this exercise' className='like'>
-          <span onClick={() => addFavorite(exerciseDetail)}>♡</span>
+        <div
+          aria-label='unfavorite this exercise'
+          className='like'
+          onClick={() => addFavorite(exerciseDetail)}
+        >
+          <span>♡</span>
         </div>
       )}
 
-      {exerciseDetail.map((item) => (
+      {exerciseDetail?.map((item) => (
         <Detail exerciseDetail={item} key={item.name} />
       ))}
+      {/* <Detail exerciseDetail={exerciseDetail} /> */}
 
       <ExerciseVideos
         exerciseVideos={exerciseVideos}

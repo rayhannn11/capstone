@@ -13,6 +13,11 @@ const useSidebar = () => {
         href: '/',
         active: pathname === '/',
       },
+      {
+        label: 'Exercises',
+        href: '/exercises',
+        active: pathname === '/exercises',
+      },
 
       {
         label: 'Recommendation',

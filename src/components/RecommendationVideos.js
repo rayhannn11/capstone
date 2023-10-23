@@ -4,7 +4,16 @@ import Loader from './Loader';
 
 const RecommendationVideos = ({ beginner, intermediate, expert }) => {
   if (!beginner.length || !intermediate.length || !expert.length) {
-    return <Loader />;
+    return (
+      <Box
+        display='flex'
+        alignItems='center'
+        justifyContent='center'
+        height='600px'
+      >
+        <Loader />
+      </Box>
+    );
   }
   return (
     <Box
@@ -21,7 +30,7 @@ const RecommendationVideos = ({ beginner, intermediate, expert }) => {
         color='#000'
         mb='33px'
       >
-        Workout forr{' '}
+        Workout for{' '}
         <span style={{ color: '#FF2625', textTransform: 'capitalize' }}>
           beginner
         </span>{' '}

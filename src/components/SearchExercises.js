@@ -4,8 +4,13 @@ import { Box, Button, Stack, TextField, Typography } from '@mui/material';
 import { exerciseOptions, fetchData } from '../utils/fetchData';
 import HorizontalScrollbar from './HorizontalScrollbar';
 
-const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
-  const [search, setSearch] = useState('');
+const SearchExercises = ({
+  search,
+  setSearch,
+  setExercises,
+  bodyPart,
+  setBodyPart,
+}) => {
   const [bodyParts, setBodyParts] = useState([]);
 
   // Effect for bodyPart list
@@ -20,6 +25,13 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
         return item.part;
       });
       setBodyParts(['all', ...bodyPartName]);
+
+      // const bodyPartsData = await fetchData(
+      //   'https://exercisedb.p.rapidapi.com/exercises/bodyPartList',
+      //   exerciseOptions
+      // );
+
+      // setBodyParts(['all', ...bodyPartsData]);
     };
 
     fetchExercisesData();
@@ -39,6 +51,19 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
           item.equipment.toLowerCase().includes(search) ||
           item.bodyPart.toLowerCase().includes(search)
       );
+
+      // const exercisesData = await fetchData(
+      //   'https://exercisedb.p.rapidapi.com/exercises',
+      //   exerciseOptions
+      // );
+
+      // const searchedExercises = exercisesData.filter(
+      //   (item) =>
+      //     item.name.toLowerCase().includes(search) ||
+      //     item.target.toLowerCase().includes(search) ||
+      //     item.equipment.toLowerCase().includes(search) ||
+      //     item.bodyPart.toLowerCase().includes(search)
+      // );
 
       window.scrollTo({ top: 1800, left: 100, behavior: 'smooth' });
 

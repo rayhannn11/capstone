@@ -13,6 +13,10 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
+    curly: 0,
+    'nonblock-statement-body-position': 0,
+    'function-paren-newline': 0,
+    'no-unused-expressions': 0,
     'quote-props': 0,
     'arrow-body-style': 0,
     'no-console': 0,
