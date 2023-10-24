@@ -29,6 +29,15 @@ export const youtubeOptions = {
   },
 };
 
+export const chatBotOptions = {
+  method: 'POST',
+  headers: {
+    'content-type': 'application/json',
+    'X-RapidAPI-Key': '0341c258f1mshb28d132a870ca52p1b9925jsn40795b5cae00',
+    'X-RapidAPI-Host': 'lemurbot.p.rapidapi.com',
+  },
+};
+
 export const fetchData = async (url, options) => {
   const res = await fetch(url, options);
   const data = await res.json();
