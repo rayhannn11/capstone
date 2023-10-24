@@ -23,7 +23,7 @@ const Recommendation = () => {
         'https://youtube-search-and-download.p.rapidapi.com/search?query=workout expert',
         youtubeOptions
       );
-      console.log(intermediate, expert);
+      console.log(beginner, intermediate, expert);
       setBeginnerData(beginner.contents);
       setIntermediateData(intermediate.contents);
       setExpertData(expert.contents);

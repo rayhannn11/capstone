@@ -13,6 +13,7 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
+    radix: 0,
     curly: 0,
     'nonblock-statement-body-position': 0,
     'function-paren-newline': 0,

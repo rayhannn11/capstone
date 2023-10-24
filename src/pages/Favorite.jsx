@@ -9,7 +9,6 @@ const Favorite = () => {
   const { exercise } = db;
   const favoriteExercise = useLiveQuery(() => exercise.toArray(), []);
 
-  console.log(favoriteExercise);
   return (
     <Box
       sx={{ mt: { lg: '96px', xs: '60px' }, ml: { md: '100px' } }}
@@ -28,11 +27,24 @@ const Favorite = () => {
         Your favorite exercises
       </Typography>
 
-      <Stack flexDirection='row' flexWrap='wrap' gap='30px'>
-        {favoriteExercise?.map((exerciseFav, idx) => (
-          <ExerciseCard key={idx} exercise={exerciseFav} />
-        ))}
-      </Stack>
+      {favoriteExercise?.length > 0 ? (
+        favoriteExercise?.map((exerciseFav, idx) => (
+          <Stack flexDirection='row' flexWrap='wrap' gap='30px'>
+            <ExerciseCard key={idx} exercise={exerciseFav} />
+          </Stack>
+        ))
+      ) : (
+        <Typography
+          variant='h4'
+          fontWeight='bold'
+          sx={{
+            fontSize: { lg: '24px', xs: '18px' },
+            textAlign: { xs: 'center', lg: 'left' },
+          }}
+        >
+          No Exercises Founded
+        </Typography>
+      )}
     </Box>
   );
 };

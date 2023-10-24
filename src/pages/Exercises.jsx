@@ -7,6 +7,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Typography,
 } from '@mui/material';
 
 import { exerciseOptions, fetchData } from '../utils/fetchData';
@@ -14,12 +15,12 @@ import ExerciseCard from '../components/ExerciseCard';
 import Loader from '../components/Loader';
 
 const Exercises = () => {
-  const [exercises, setExercises] = useState([]);
+  const [exercisesData, setExercisesData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [exercisesPerPage] = useState(6);
 
   const [filters, setFilters] = useState({ bodyPart: '', equipment: '' });
-  const [filteredExercises, setFilteredExercises] = useState([]);
+  const [exercisesDisplay, setExercisesDisplay] = useState([]);
 
   const handleFilter = (event) => {
     setFilters({ ...filters, [event.target.name]: event.target.value });
@@ -32,7 +33,8 @@ const Exercises = () => {
         'https://zuka.p.rapidapi.com/',
         exerciseOptions
       );
-      setExercises(exercisesDataFetch.exercices);
+      setExercisesData(exercisesDataFetch.exercices);
+      setExercisesDisplay(exercisesDataFetch.exercices);
     };
 
     fetchExercisesData();
@@ -40,25 +42,20 @@ const Exercises = () => {
 
   // filter Exercises
   useEffect(() => {
-    const tempData = [...exercises];
+    const tempData = [...exercisesData];
     const filteredExercisesData = tempData.filter((item) =>
       Object.entries(filters).every(([key, value]) => item[key].includes(value))
     );
-    setFilteredExercises(filteredExercisesData);
+    setExercisesDisplay(filteredExercisesData);
   }, [filters]);
 
   // Pagination Logic
   const indexOfLastExercise = currentPage * exercisesPerPage;
   const indexOfFirstExercise = indexOfLastExercise - exercisesPerPage;
-  const currentExercises =
-    filteredExercises.length > 0
-      ? filteredExercises.slice(indexOfFirstExercise, indexOfLastExercise)
-      : exercises.slice(indexOfFirstExercise, indexOfLastExercise);
-
-  const countPage =
-    Math.ceil(
-      filteredExercises.length > 0 ? filteredExercises.length : exercises.length
-    ) / exercisesPerPage;
+  const currentExercises = exercisesDisplay.slice(
+    indexOfFirstExercise,
+    indexOfLastExercise
+  );
 
   const paginate = (event, value) => {
     setCurrentPage(value);
@@ -66,7 +63,7 @@ const Exercises = () => {
     window.scrollTo({ top: 1800, behavior: 'smooth' });
   };
 
-  if (!currentExercises.length)
+  if (!exercisesData.length)
     // eslint-disable-next-line
     return (
       <Box
@@ -146,17 +143,36 @@ const Exercises = () => {
         flexWrap='wrap'
         justifyContent='center'
       >
-        {currentExercises?.map((exercise, idx) => (
-          <ExerciseCard key={idx} exercise={exercise} />
-        ))}
+        {currentExercises.length > 0 ? (
+          currentExercises.map((exercise, idx) => (
+            <ExerciseCard key={idx} exercise={exercise} />
+          ))
+        ) : (
+          <Stack
+            display='flex'
+            alignItems='center'
+            justifyContent='center'
+            height='400px'
+          >
+            <Typography
+              variant='h4'
+              fontWeight='bold'
+              sx={{ fontSize: { lg: '44px', xs: '30px' } }}
+            >
+              No Exercises Founded
+            </Typography>
+          </Stack>
+        )}
       </Stack>
       <Stack sx={{ mt: { lg: '114px', xs: '70px' } }} alignItems='center'>
-        {exercises?.length > 9 && (
+        {currentExercises?.length > 0 && (
           <Pagination
             color='standard'
             shape='rounded'
             defaultPage={1}
-            count={countPage.toFixed(0)}
+            count={parseInt(
+              Math.ceil(exercisesDisplay.length / exercisesPerPage)
+            )}
             page={currentPage}
             onChange={paginate}
             size='large'

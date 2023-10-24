@@ -49,16 +49,15 @@ const RecommendationVideos = ({ beginner, intermediate, expert }) => {
           <a
             key={index}
             className='exercise-video'
-            href={`https://www.youtube.com/watch?v=${item.video.videoId}`}
+            href={`https://www.youtube.com/watch?v=${item?.video?.videoId}`}
             target='_blank'
             rel='noreferrer'
           >
             <img
-              style={{ borderTopLeftRadius: '20px' }}
-              src={item.video.thumbnails[0].url}
-              alt={item.video.title}
+              src={item?.video?.thumbnails[0].url}
+              alt={item?.video?.title}
             />
-            <Box>
+            <Box sx={{ padding: '10px' }}>
               <Typography
                 sx={{ fontSize: { lg: '20px', xs: '18px' } }}
                 fontWeight={600}
@@ -92,36 +91,35 @@ const RecommendationVideos = ({ beginner, intermediate, expert }) => {
       <Stack
         sx={{
           flexDirection: { lg: 'row' },
-          gap: { lg: '40px', xs: '0px' },
+          gap: { lg: '20px', xs: '0px' },
         }}
         justifyContent='flex-start'
         flexWrap='wrap'
         alignItems='center'
-        marginBottom='80px '
+        marginBottom='80px'
       >
         {intermediate?.slice(0, 8)?.map((item, index) => (
           <a
             key={index}
             className='exercise-video'
-            href={`https://www.youtube.com/watch?v=${item.video.videoId}`}
+            href={`https://www.youtube.com/watch?v=${item?.video?.videoId}`}
             target='_blank'
             rel='noreferrer'
           >
             <img
-              style={{ borderTopLeftRadius: '20px' }}
-              src={item.video.thumbnails[0].url}
-              alt={item.video.title}
+              src={item?.video?.thumbnails[0].url}
+              alt={item?.video?.title}
             />
-            <Box>
+            <Box sx={{ padding: '10px' }}>
               <Typography
                 sx={{ fontSize: { lg: '20px', xs: '18px' } }}
                 fontWeight={600}
                 color='#000'
               >
-                {item.video.title}
+                {item?.video?.title}
               </Typography>
               <Typography fontSize='14px' color='#000'>
-                {item.video.channelName}
+                {item?.video?.channelName}
               </Typography>
             </Box>
           </a>
@@ -156,25 +154,24 @@ const RecommendationVideos = ({ beginner, intermediate, expert }) => {
           <a
             key={index}
             className='exercise-video'
-            href={`https://www.youtube.com/watch?v=${item.video.videoId}`}
+            href={`https://www.youtube.com/watch?v=${item?.video?.videoId}`}
             target='_blank'
             rel='noreferrer'
           >
             <img
-              style={{ borderTopLeftRadius: '20px' }}
-              src={item.video.thumbnails[0].url}
-              alt={item.video.title}
+              src={item?.video?.thumbnails[0].url}
+              alt={item?.video?.title}
             />
-            <Box>
+            <Box sx={{ padding: '10px' }}>
               <Typography
                 sx={{ fontSize: { lg: '20px', xs: '18px' } }}
                 fontWeight={600}
                 color='#000'
               >
-                {item.video.title}
+                {item?.video?.title}
               </Typography>
               <Typography fontSize='14px' color='#000'>
-                {item.video.channelName}
+                {item?.video?.channelName}
               </Typography>
             </Box>
           </a>
