@@ -1,5 +1,3 @@
-# React Fitness Application
+# FitGuide
 
-![React Fitness Application](https://i.ibb.co/Yt9spGc/image.png)
-
-## Launch your development career with project-based coaching - https://www.jsmastery.pro
+![FitGuide Application](https://i.ibb.co/mq6Tcdb/FitGuide.jpg)
