@@ -25,65 +25,65 @@ const ExerciseDetail = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     const fetchExercisesData = async () => {
-      const exerciseDbUrl = 'https://zuka.p.rapidapi.com';
-      const youtubeSearchUrl =
-        'https://youtube-search-and-download.p.rapidapi.com';
-
-      // fetch for excerciseDetail
-
-      const exerciseDetailData = await fetchData(
-        `${exerciseDbUrl}/exercices/id/${id}`,
-        exerciseOptions
-      );
-      setExerciseDetail(exerciseDetailData.exercice);
-
-      // fetch for excerciseVideoYt
-      const [firstItem] = exerciseDetailData.exercice;
-
-      const exerciseVideosData = await fetchData(
-        `${youtubeSearchUrl}/search?query=${firstItem.name} exercise`,
-        youtubeOptions
-      );
-      setExerciseVideos(exerciseVideosData.contents);
-
-      // fetch for similarExcercise
-
-      const targetMuscleExercisesData = await fetchData(
-        `${exerciseDbUrl}/exercices/muscle/${firstItem.target}`,
-        exerciseOptions
-      );
-
-      setTargetMuscleExercises(targetMuscleExercisesData.exercice);
-
-      // const exerciseDbUrl = 'https://exercisedb.p.rapidapi.com';
+      // const exerciseDbUrl = 'https://zuka.p.rapidapi.com';
       // const youtubeSearchUrl =
       //   'https://youtube-search-and-download.p.rapidapi.com';
 
+      // // fetch for excerciseDetail
+
       // const exerciseDetailData = await fetchData(
-      //   `${exerciseDbUrl}/exercises/exercise/${id}`,
+      //   `${exerciseDbUrl}/exercices/id/${id}`,
       //   exerciseOptions
       // );
-      // setExerciseDetail(exerciseDetailData);
+      // setExerciseDetail(exerciseDetailData.exercice);
+
+      // // fetch for excerciseVideoYt
+      // const [firstItem] = exerciseDetailData.exercice;
 
       // const exerciseVideosData = await fetchData(
-      //   `${youtubeSearchUrl}/search?query=${exerciseDetailData.name} exercise`,
+      //   `${youtubeSearchUrl}/search?query=${firstItem.name} exercise`,
       //   youtubeOptions
       // );
       // setExerciseVideos(exerciseVideosData.contents);
 
+      // // fetch for similarExcercise
+
       // const targetMuscleExercisesData = await fetchData(
-      //   `${exerciseDbUrl}/exercises/target/${exerciseDetailData.target}`,
+      //   `${exerciseDbUrl}/exercices/muscle/${firstItem.target}`,
       //   exerciseOptions
       // );
-      // setTargetMuscleExercises(targetMuscleExercisesData);
+
+      // setTargetMuscleExercises(targetMuscleExercisesData.exercice);
+
+      const exerciseDbUrl = 'https://exercisedb.p.rapidapi.com';
+      const youtubeSearchUrl =
+        'https://youtube-search-and-download.p.rapidapi.com';
+
+      const exerciseDetailData = await fetchData(
+        `${exerciseDbUrl}/exercises/exercise/${id}`,
+        exerciseOptions
+      );
+      setExerciseDetail(exerciseDetailData);
+
+      const exerciseVideosData = await fetchData(
+        `${youtubeSearchUrl}/search?query=${exerciseDetailData.name} exercise`,
+        youtubeOptions
+      );
+      setExerciseVideos(exerciseVideosData.contents);
+
+      const targetMuscleExercisesData = await fetchData(
+        `${exerciseDbUrl}/exercises/target/${exerciseDetailData.target}`,
+        exerciseOptions
+      );
+      setTargetMuscleExercises(targetMuscleExercisesData);
     };
 
     fetchExercisesData();
   }, [id]);
 
   const addFavorite = async (data) => {
-    const { name, gifUrl, bodyPart, target, equipment } = data[0];
-    // const { name, gifUrl, bodyPart, target, equipment } = data;
+    // const { name, gifUrl, bodyPart, target, equipment } = data[0];
+    const { name, gifUrl, bodyPart, target, equipment } = data;
     await exercise.add({
       id,
       name,
@@ -124,10 +124,10 @@ const ExerciseDetail = () => {
         </div>
       )}
 
-      {exerciseDetail?.map((item) => (
+      {/* {exerciseDetail?.map((item) => (
         <Detail exerciseDetail={item} key={item.name} />
-      ))}
-      {/* <Detail exerciseDetail={exerciseDetail} /> */}
+      ))} */}
+      <Detail exerciseDetail={exerciseDetail} />
 
       <ExerciseVideos
         exerciseVideos={exerciseVideos}

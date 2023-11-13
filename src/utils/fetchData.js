@@ -1,23 +1,16 @@
-export const exerciseOptions = {
-  method: 'GET',
-  headers: {
-    'X-RapidAPI-Host': 'zuka.p.rapidapi.com',
-    'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_KEY,
-  },
-};
 // export const exerciseOptions = {
 //   method: 'GET',
 //   headers: {
-//     'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com',
+//     'X-RapidAPI-Host': 'zuka.p.rapidapi.com',
 //     'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_KEY,
 //   },
 // };
 
-export const exerciseDifficultyOptions = {
+export const exerciseOptions = {
   method: 'GET',
   headers: {
-    'X-RapidAPI-Host': 'exercises-by-api-ninjas.p.rapidapi.com',
-    'X-RapidAPI-Key': '0341c258f1mshb28d132a870ca52p1b9925jsn40795b5cae00',
+    'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com',
+    'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_KEY,
   },
 };
 

@@ -29,12 +29,20 @@ const Exercises = () => {
   // get All Exercises when onMounted
   useEffect(() => {
     const fetchExercisesData = async () => {
+      // const exercisesDataFetch = await fetchData(
+      //   'https://zuka.p.rapidapi.com/',
+      //   exerciseOptions
+      // );
+      // setExercisesData(exercisesDataFetch.exercices);
+      // setExercisesDisplay(exercisesDataFetch.exercices);
+
       const exercisesDataFetch = await fetchData(
-        'https://zuka.p.rapidapi.com/',
+        'https://exercisedb.p.rapidapi.com/exercises?limit=1000',
         exerciseOptions
       );
-      setExercisesData(exercisesDataFetch.exercices);
-      setExercisesDisplay(exercisesDataFetch.exercices);
+      console.log(exercisesDataFetch);
+      setExercisesData(exercisesDataFetch);
+      setExercisesDisplay(exercisesDataFetch);
     };
 
     fetchExercisesData();
@@ -64,7 +72,6 @@ const Exercises = () => {
   };
 
   if (!exercisesData.length)
-    // eslint-disable-next-line
     return (
       <Box
         display='flex'

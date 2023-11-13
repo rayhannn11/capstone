@@ -12,35 +12,35 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
 
   useEffect(() => {
     const fetchExercisesData = async () => {
-      if (bodyPart === 'all') {
-        const exercisesDataFetch = await fetchData(
-          'https://zuka.p.rapidapi.com/',
-          exerciseOptions
-        );
-        setExercises(exercisesDataFetch.exercices);
-      } else {
-        const exercisesDataFetch = await fetchData(
-          `https://zuka.p.rapidapi.com/exercices/part/${bodyPart}`,
-          exerciseOptions
-        );
-        setExercises(exercisesDataFetch.exercice);
-      }
-
-      // let exercisesData = [];
-
       // if (bodyPart === 'all') {
-      //   exercisesData = await fetchData(
-      //     'https://exercisedb.p.rapidapi.com/exercises',
+      //   const exercisesDataFetch = await fetchData(
+      //     'https://zuka.p.rapidapi.com/',
       //     exerciseOptions
       //   );
+      //   setExercises(exercisesDataFetch.exercices);
       // } else {
-      //   exercisesData = await fetchData(
-      //     `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`,
+      //   const exercisesDataFetch = await fetchData(
+      //     `https://zuka.p.rapidapi.com/exercices/part/${bodyPart}`,
       //     exerciseOptions
       //   );
+      //   setExercises(exercisesDataFetch.exercice);
       // }
 
-      // setExercises(exercisesData);
+      let exercisesData = [];
+
+      if (bodyPart === 'all') {
+        exercisesData = await fetchData(
+          'https://exercisedb.p.rapidapi.com/exercises',
+          exerciseOptions
+        );
+      } else {
+        exercisesData = await fetchData(
+          `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`,
+          exerciseOptions
+        );
+      }
+
+      setExercises(exercisesData);
     };
 
     fetchExercisesData();
@@ -89,7 +89,7 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
             color='standard'
             shape='rounded'
             defaultPage={1}
-            count={Math.ceil(30 / exercisesPerPage)}
+            count={Math.ceil(exercises.length / exercisesPerPage)}
             page={currentPage}
             onChange={paginate}
             size='large'

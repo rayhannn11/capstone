@@ -11,22 +11,22 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
   // Effect for bodyPart list
   useEffect(() => {
     const fetchExercisesData = async () => {
-      const bodyPartsData = await fetchData(
-        'https://zuka.p.rapidapi.com/exercices/bodyPart',
-        exerciseOptions
-      );
-      const { bodyparts } = bodyPartsData;
-      const bodyPartName = bodyparts.map((item) => {
-        return item.part;
-      });
-      setBodyParts(['all', ...bodyPartName]);
-
       // const bodyPartsData = await fetchData(
-      //   'https://exercisedb.p.rapidapi.com/exercises/bodyPartList',
+      //   'https://zuka.p.rapidapi.com/exercices/bodyPart',
       //   exerciseOptions
       // );
+      // const { bodyparts } = bodyPartsData;
+      // const bodyPartName = bodyparts.map((item) => {
+      //   return item.part;
+      // });
+      // setBodyParts(['all', ...bodyPartName]);
 
-      // setBodyParts(['all', ...bodyPartsData]);
+      const bodyPartsData = await fetchData(
+        'https://exercisedb.p.rapidapi.com/exercises/bodyPartList',
+        exerciseOptions
+      );
+
+      setBodyParts(['all', ...bodyPartsData]);
     };
 
     fetchExercisesData();
@@ -34,31 +34,31 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
 
   const handleSearch = async () => {
     if (search) {
-      const exercisesData = await fetchData(
-        'https://zuka.p.rapidapi.com/',
-        exerciseOptions
-      );
-
-      const searchedExercises = exercisesData.exercices.filter(
-        (item) =>
-          item.name.toLowerCase().includes(search) ||
-          item.target.toLowerCase().includes(search) ||
-          item.equipment.toLowerCase().includes(search) ||
-          item.bodyPart.toLowerCase().includes(search)
-      );
-
       // const exercisesData = await fetchData(
-      //   'https://exercisedb.p.rapidapi.com/exercises',
+      //   'https://zuka.p.rapidapi.com/',
       //   exerciseOptions
       // );
 
-      // const searchedExercises = exercisesData.filter(
+      // const searchedExercises = exercisesData.exercices.filter(
       //   (item) =>
       //     item.name.toLowerCase().includes(search) ||
       //     item.target.toLowerCase().includes(search) ||
       //     item.equipment.toLowerCase().includes(search) ||
       //     item.bodyPart.toLowerCase().includes(search)
       // );
+
+      const exercisesData = await fetchData(
+        'https://exercisedb.p.rapidapi.com/exercises',
+        exerciseOptions
+      );
+
+      const searchedExercises = exercisesData.filter(
+        (item) =>
+          item.name.toLowerCase().includes(search) ||
+          item.target.toLowerCase().includes(search) ||
+          item.equipment.toLowerCase().includes(search) ||
+          item.bodyPart.toLowerCase().includes(search)
+      );
 
       window.scrollTo({ top: 1800, left: 100, behavior: 'smooth' });
 

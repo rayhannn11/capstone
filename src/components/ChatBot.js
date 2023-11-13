@@ -62,12 +62,20 @@ const ChatBot = ({ onClose }) => {
   };
   return (
     <Paper
+      sx={{
+        '@media (max-width: 600px)': {
+          width: '200px',
+          minHeight: '140px',
+        },
+        '@media (min-width: 601px)': {
+          width: '400px',
+          minHeight: '200px',
+        },
+      }}
       style={{
         position: 'fixed',
         bottom: 16,
         right: 16,
-        width: 400,
-        minHeight: 200,
         boxShadow: '0px 0px 5px 2px rgba(0,0,0,0.1)',
       }}
     >
